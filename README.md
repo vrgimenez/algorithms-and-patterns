@@ -8,7 +8,7 @@ It covers algorithm analysis, data structures, and practical problem-solving whi
 The approach combines engineering principles with functional block architecture to produce clear, maintainable, and scalable software solutions.
 
 # Disclaimer
-All examples where migrated from Java original code from Ms Valerio Fritelli for the Algorithms and patterns class
+Some of the examples where migrated from Java original code from Ms Valerio Fritelli for the Algorithms and patterns class
 
 # Chapters
 Each chapter cover a specific area of algorithms and design patterns
@@ -17,7 +17,14 @@ Each chapter cover a specific area of algorithms and design patterns
 Recursive algorithms
 
 ## Chapter 2
-Sorting algorithms 
+Sorting algorithms
+
+## Chapter 3
+Search Algorithms
+
+## Chapter 4
+Data Collections
+
 
 # Build
 Enter each chapter and:
