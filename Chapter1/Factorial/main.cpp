@@ -21,7 +21,7 @@ int main(void)
     std::cout << "The  factorial of " << n << " (recursive) is: " << f1 << std::endl;
 
     int f2 = iterativeFactorial(n);
-    std::cout << "The  factorial of " << n << " (recursive) is: " << f1 << std::endl;
+    std::cout << "The  factorial of " << n << " (iterative) is: " << f1 << std::endl;
 
     int fb1 = recursiveFibonacci(n);
     std::cout << "The Fibonacci of " << n << " (recursive) is: " << fb1 << std::endl;
