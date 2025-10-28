@@ -15,9 +15,18 @@ namespace Algorithm {
         return fact;
     }
     
-    int recursiveFibonacci(int n) {
-        if (n <= 1) return 1;
-        return recursiveFibonacci(n - 1) + recursiveFibonacci(n - 2);
+    int recursiveFibonacci(int n, int &stackCount, int &spatialComplexity, int &temporalComplexity) {
+        stackCount++;
+        temporalComplexity++;
+        spatialComplexity = stackCount > spatialComplexity ? stackCount : spatialComplexity;
+
+        if (n <= 1) {
+            stackCount--;
+            return 1;
+        }
+        int val = recursiveFibonacci(n - 1, stackCount, spatialComplexity, temporalComplexity) + recursiveFibonacci(n - 2, stackCount, spatialComplexity, temporalComplexity);
+        stackCount--;
+        return val;
     }
     
     int iterativeFibonacci(int n) {

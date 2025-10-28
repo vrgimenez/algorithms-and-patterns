@@ -23,7 +23,14 @@ int main(void)
     int f2 = iterativeFactorial(n);
     std::cout << "The  factorial of " << n << " (iterative) is: " << f1 << std::endl;
 
-    int fb1 = recursiveFibonacci(n);
+    int stackCount = 0;
+    int spatialComplexity = 0;
+    int temporalComplexity = 0;
+
+    int fb1 = recursiveFibonacci(n, stackCount, spatialComplexity, temporalComplexity);
+    std::cout << "Stack in zero? " << stackCount << std::endl;
+    std::cout << "The Fibonacci spatial complexity is  " << spatialComplexity << std::endl;
+    std::cout << "The Fibonacci temporal complexity is  " << temporalComplexity << std::endl;
     std::cout << "The Fibonacci of " << n << " (recursive) is: " << fb1 << std::endl;
     
     int fb2 = iterativeFibonacci(n);
