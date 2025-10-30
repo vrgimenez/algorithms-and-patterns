@@ -25,6 +25,8 @@ Search Algorithms
 ## Chapter 4
 Data Collections
 
+## Chapter 5
+Algorithmic Paradigms
 
 # Build
 Enter each chapter and:
