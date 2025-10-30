@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
     // Run BFS first, then DFS (or comment one)
     QTimer::singleShot(500, [](){ graph->bfs(0, 4); });  // Searches 0 to 4
-    //QTimer::singleShot(500, [](){ graph->dfs(0, 4); }); //Searches all paths
+    // QTimer::singleShot(500, [](){ graph->dfs(0, 4); }); //Searches all paths
 
     return app.exec();
 }

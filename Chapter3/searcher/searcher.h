@@ -7,7 +7,7 @@
 class Searcher {
 public:
     Searcher();
-    void setArraySize(int n);
+    void setArraySize(int n = 100);
     void shuffle();
     void generate();
     bool isSorted();

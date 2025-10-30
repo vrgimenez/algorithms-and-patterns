@@ -12,7 +12,7 @@ Searcher::Searcher() {
 }
 
 void Searcher::setArraySize(int n) {
-    array.resize(100);
+    array.resize(n);
     generate();
 }
 
@@ -52,6 +52,7 @@ int Searcher::find(int value, int &iterations) {
         iterations = 0;
 
         while (low <= high) {
+            std::cout << "Indices low= " << low << ", high=" << high << std::endl;
             iterations++;
             int mid = low + (high - low) / 2;
 
