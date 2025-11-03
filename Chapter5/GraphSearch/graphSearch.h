@@ -28,6 +28,7 @@ public:
     void draw();
     void bfs(int start, int goal);
     void dfs(int start, int goal);
+    bool loadFromFile(const std::string &filename);
 
 private:
     GraphicsConsole& gc;

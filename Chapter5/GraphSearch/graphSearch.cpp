@@ -2,6 +2,9 @@
 #include <QThread>
 #include <QApplication>
 
+#include <iostream>
+#include <fstream>
+
 GraphSearch::GraphSearch(GraphicsConsole& gc) : gc(gc) {}
 
 void GraphSearch::addNode(const std::string& label, int x, int y) {
@@ -47,7 +50,7 @@ void GraphSearch::highlightNode(int i, const QColor& color) {
     gc.drawText(nodes[i].x - 5, nodes[i].y + 5, QString::fromStdString(nodes[i].label));
     gc.repaint();
     QCoreApplication::processEvents();  
-    QThread::msleep(250);
+    QThread::msleep(100);
 }
 
 void GraphSearch::drawEdge(const Edge& e, const QColor& color) {
@@ -55,7 +58,7 @@ void GraphSearch::drawEdge(const Edge& e, const QColor& color) {
     gc.drawLine(nodes[e.from].x, nodes[e.from].y, nodes[e.to].x, nodes[e.to].y);
     gc.repaint();
     QCoreApplication::processEvents();  
-    QThread::msleep(250);
+    QThread::msleep(100);
 }
 
 // ---------------- BFS ----------------
@@ -80,12 +83,17 @@ void GraphSearch::bfs(int start, int goal) {
         }
 
         for (auto& e : edges) {
-            if (e.from == v && !visited[e.to]) {
-                visited[e.to] = true;
-                drawEdge(e, Qt::blue);  // Edge found
-                highlightNode(e.to, Qt::yellow); // Discovered, pending to draw
-                q.push(e.to);
-            }
+            if (e.from == v) {
+                if (!visited[e.to]) {
+                    visited[e.to] = true;
+                    drawEdge(e, Qt::blue);  // Edge found, exploring
+                    highlightNode(e.to, Qt::yellow); // Discovered, pending to draw
+                    q.push(e.to);
+                } else {
+                    // already visited, so this edge is not optimal
+                    drawEdge(e, QColor(255, 165, 0));      // orange = discarded
+                }
+            } 
         }
     }
 }
@@ -97,7 +105,7 @@ void GraphSearch::dfs(int start, int goal) {
     visited[start] = true;
     highlightNode(start, Qt::green);
     QCoreApplication::processEvents();
-    QThread::msleep(200);
+    QThread::msleep(100);
 
     if (start == goal) {
         highlightNode(start, QColor(255, 0, 0)); // red — found
@@ -106,9 +114,67 @@ void GraphSearch::dfs(int start, int goal) {
     }
 
     for (auto& e : edges) {
-        if (e.from == start && !visited[e.to]) {
-            drawEdge(e, Qt::red);
-            dfs(e.to, goal);
-        }
+        if (e.from == start) {
+            if (!visited[e.to]) {
+                drawEdge(e, Qt::blue);  // Edge found, exploring
+                highlightNode(e.to, Qt::yellow); // Discovered, pending to draw
+                dfs(e.to, goal);
+            } else {
+                // already visited, so this edge is not optimal
+                drawEdge(e, QColor(255, 165, 0));      // orange = discarded
+            }
+        } 
     }
+}
+
+bool GraphSearch::loadFromFile(const std::string &filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: could not open " << filename << std::endl;
+        return false;
+    }
+
+    nodes.clear();
+    edges.clear();
+
+    int n;
+    file >> n; // number of nodes
+    if (!file || n <= 0) {
+        std::cerr << "Invalid node count in " << filename << std::endl;
+        return false;
+    }
+
+    // --- Read nodes ---
+    for (int i = 0; i < n; ++i) {
+        std::string label;
+        int x, y;
+        file >> label >> x >> y;
+        if (!file) {
+            std::cerr << "Error reading node " << i << std::endl;
+            return false;
+        }
+        nodes.push_back({label, x, y});
+    }
+
+    // --- Read edges ---
+    int m;
+    file >> m; // number of edges
+    if (!file || m < 0) {
+        std::cerr << "Invalid edge count in " << filename << std::endl;
+        return false;
+    }
+
+    for (int i = 0; i < m; ++i) {
+        int from, to, weight;
+        file >> from >> to >> weight;
+        if (!file) {
+            std::cerr << "Error reading edge " << i << std::endl;
+            return false;
+        }
+        edges.push_back({from, to, weight});
+    }
+
+    std::cout << "Loaded graph: " << nodes.size() << " nodes, " 
+              << edges.size() << " edges." << std::endl;
+    return true;
 }

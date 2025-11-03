@@ -13,6 +13,9 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/../../common
     )
 
+# Copy required files to build folder
+configure_file(graph.conf graph.conf)
+
 add_executable(GraphSearchDemo
     ${CMAKE_CURRENT_LIST_DIR}/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/graphSearch.cpp
