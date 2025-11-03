@@ -120,7 +120,9 @@ int main(int argc, char* argv[]) {
             vec[vocabIndex[w]]++;
         docVectors.push_back(vec);
     }
+
     std::cout << "Documents TF: " << docVectors << std::endl;
+    std::cout << "Full vocabulary: " << vocab << std::endl;
     
      // Calculate cosine similarity between the query and the documents
     std::cout << "\nPhrase to query: \"" << query << "\"\n\n";
