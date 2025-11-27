@@ -28,6 +28,9 @@ Data Collections
 ## Chapter 5
 Algorithmic Paradigms
 
+## Chapter 6
+OOP and Design Patterns
+
 # Build
 Enter each chapter and:
 ```bash
