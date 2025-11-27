@@ -6,7 +6,7 @@ int main() {
     JsonLanguageProvider langEn("lang/en.json");
     JsonLanguageProvider langDe("lang/de.json");
 
-    std::string raw = "{hello} John, {welcome} {home}!";
+    std::string raw = "{hello} John, {welcome} {home}!. {the} {food} {is} {ready}";
 
     std::cout << "English: " << langEn.translateTags(raw) << std::endl;
     std::cout << "Spanish: " << langEs.translateTags(raw) << std::endl;

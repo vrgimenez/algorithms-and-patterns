@@ -57,6 +57,8 @@ public:
 
         return nullptr;
     }
+private:
+    CarFactory() = default;
 };
 
 int main(int argc, char **argv) {

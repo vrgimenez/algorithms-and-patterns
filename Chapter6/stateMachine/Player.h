@@ -8,6 +8,9 @@ public:
 
     void setState(State* newState) {
         std::cout << "State → " << newState->name() << "\n";
+        if (state != nullptr) {
+            delete state;
+        }
         state = newState;
     }
 

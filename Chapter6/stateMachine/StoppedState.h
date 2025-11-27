@@ -3,6 +3,7 @@
 
 class StoppedState : public State {
 public:
+    virtual ~StoppedState()  { std::cout << "Destroying state " << this->name() << std::endl; }
     void play(Player& player) override;
     void pause(Player&) override {
         std::cout << "Pause ignored — player is stopped.\n";

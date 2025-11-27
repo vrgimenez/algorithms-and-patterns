@@ -24,7 +24,7 @@ public:
             if (node->contains(seg))
                 node = &(*node)[seg];
             else
-                return "{" + key + "}"; // unknown tag → keep tag but show {}
+                return key ; // unknown tag → keep tag but show {}
         }
 
         if (node->is_string())

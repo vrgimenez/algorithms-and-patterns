@@ -3,6 +3,7 @@
 
 class PlayingState : public State {
 public:
+    virtual ~PlayingState()  { std::cout << "Destroying state " << this->name() << std::endl; }
     void play(Player&) override {
         std::cout << "Already playing.\n";
     }
